@@ -1,23 +1,59 @@
 import Link from 'next/link';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp } from 'react-icons/fa';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   
   const quickLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: '/product' },
+    { name: 'Products', href: '/products' },
     { name: 'About Us', href: '/about' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Contact', href: '/contact' },
   ];
   
+  // WhatsApp number
+  const whatsappNumber = '2348123589191';
+  
+  // Service-specific WhatsApp messages
+  const whatsappLinks = {
+    solar: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      "Hello! I'm interested in your Solar Installation services. I'd like to get a quote and learn more about your installation process for my home/business."
+    )}`,
+    maintenance: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      "Hello! I need Maintenance services for my solar system. Please provide information about your maintenance packages and schedule."
+    )}`,
+    audit: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      "Hello! I'd like to schedule an Energy Audit for my property. Please let me know how this works and what information you need from me."
+    )}`,
+  };
+  
   const services = [
-    { name: 'Solar Installation', href: '/services/solar-installation' },
-    { name: 'Portable Power', href: '/product?category=portable' },
-    { name: 'Custom Systems', href: '/product?category=custom' },
-    { name: 'Maintenance', href: '/services/maintenance' },
-    { name: 'Energy Audit', href: '/services/energy-audit' },
+    { 
+      name: 'Solar Installation', 
+      href: whatsappLinks.solar,
+      isExternal: true 
+    },
+    { 
+      name: 'Portable Power', 
+      href: '/products?category=powerStations',
+      isExternal: false 
+    },
+    { 
+      name: 'Custom Systems', 
+      href: '/products?category=custom',
+      isExternal: false 
+    },
+    { 
+      name: 'Maintenance', 
+      href: whatsappLinks.maintenance,
+      isExternal: true 
+    },
+    { 
+      name: 'Energy Audit', 
+      href: whatsappLinks.audit,
+      isExternal: true 
+    },
   ];
   
   const contactInfo = [
@@ -33,6 +69,12 @@ export default function Footer() {
     { icon: <FaTwitter className="w-5 h-5" />, href: 'https://twitter.com/bexcelinnovate', label: 'Twitter' },
   ];
 
+  // General consultation WhatsApp link
+  const consultationMessage = encodeURIComponent(
+    "Hello! I'd like to get a free consultation about solar solutions for my home/business."
+  );
+  const consultationLink = `https://wa.me/${whatsappNumber}?text=${consultationMessage}`;
+
   return (
     <footer className="relative bg-neutral-950 text-white/80 overflow-hidden">
       {/* Background decorative elements */}
@@ -42,20 +84,13 @@ export default function Footer() {
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
           
-          {/* Company Info */}
+          {/* Company Info - Logo Removed */}
           <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <img 
-                src="/logo.svg" 
-                alt="Bexcel Innovations Logo" 
-                className="h-10 brightness-0 invert"
-              />
-              <div>
-                <p className="text-xl font-bold text-white">
-                  Bexcel <span className="text-lime-400">Innovations</span>
-                </p>
-                <p className="text-sm text-white/60">Solar Energy Solutions</p>
-              </div>
+            <div>
+              <p className="text-xl font-bold text-white">
+                Bexcel <span className="text-lime-400">Innovations</span>
+              </p>
+              <p className="text-sm text-white/60">Solar Energy Solutions</p>
             </div>
             
             <p className="text-sm leading-relaxed text-white/70">
@@ -109,13 +144,25 @@ export default function Footer() {
             <ul className="space-y-3">
               {services.map((service) => (
                 <li key={service.name}>
-                  <Link 
-                    href={service.href}
-                    className="text-white/70 hover:text-lime-400 transition-colors duration-300 flex items-center gap-2 group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-lime-400/0 group-hover:bg-lime-400 transition-all duration-300"></span>
-                    {service.name}
-                  </Link>
+                  {service.isExternal ? (
+                    <a
+                      href={service.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/70 hover:text-lime-400 transition-colors duration-300 flex items-center gap-2 group"
+                    >
+                      <FaWhatsapp className="text-lime-400 text-sm opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span>{service.name}</span>
+                    </a>
+                  ) : (
+                    <Link 
+                      href={service.href}
+                      className="text-white/70 hover:text-lime-400 transition-colors duration-300 flex items-center gap-2 group"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-lime-400/0 group-hover:bg-lime-400 transition-all duration-300"></span>
+                      {service.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -144,13 +191,19 @@ export default function Footer() {
               ))}
             </ul>
             
-            {/* Call to Action */}
+            {/* Call to Action - WhatsApp Consultation */}
             <div className="mt-8">
-              <Link href="/contact">
-                <button className="w-full bg-lime-400 text-neutral-900 font-semibold py-3 rounded-lg hover:bg-lime-300 transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
+              <a
+                href={consultationLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-lime-400 hover:bg-lime-300 text-neutral-900 font-semibold py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl group"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  <FaWhatsapp className="w-5 h-5" />
                   Get Free Consultation
-                </button>
-              </Link>
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -185,7 +238,7 @@ export default function Footer() {
           <div className="mt-6 flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-white/5">
             <div className="text-center">
               <div className="text-xs text-white/40 mb-1">Certified Installers</div>
-              <div className="text-xs text-lime-400 font-medium">NAFDAC Registered</div>
+              <div className="text-xs text-lime-400 font-medium">Coren Approved</div>
             </div>
             <div className="w-px h-6 bg-white/10"></div>
             <div className="text-center">
@@ -195,7 +248,7 @@ export default function Footer() {
             <div className="w-px h-6 bg-white/10"></div>
             <div className="text-center">
               <div className="text-xs text-white/40 mb-1">Warranty</div>
-              <div className="text-xs text-lime-400 font-medium">25-Year Guarantee</div>
+              <div className="text-xs text-lime-400 font-medium">Strong Guarantee</div>
             </div>
           </div>
         </div>

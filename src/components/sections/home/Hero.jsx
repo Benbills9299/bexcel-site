@@ -59,7 +59,7 @@ export default function Hero() {
               </div>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 hover:bg-white/10 transition-all duration-300 delay-75">
                 <span className="text-lime-300 text-sm">→</span>
-                <span className="text-sm font-medium">25-Year Performance Guarantee</span>
+                <span className="text-sm font-medium">Performance Guarantee</span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 hover:bg-white/10 transition-all duration-300 delay-150">
                 <span className="text-lime-300 text-sm">→</span>
@@ -109,11 +109,11 @@ export default function Hero() {
                   <div className="text-xs text-gray-400 mt-1">Customer Rating</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-300">25yr</div>
-                  <div className="text-xs text-gray-400 mt-1">Panel Warranty</div>
+                  <div className="text-2xl font-bold text-lime-300">20yr</div>
+                  <div className="text-xs text-gray-400 mt-1">manufacturer Panel Warranty</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-300">24/7</div>
+                  <div className="text-2xl font-bold text-lime-300"></div>
                   <div className="text-xs text-gray-400 mt-1">Nationwide Support</div>
                 </div>
               </div>
