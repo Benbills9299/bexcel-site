@@ -32,7 +32,7 @@ export const metadata = {
   openGraph: {
     title: "Bexcel Innovations - Professional Solar Installation in Warri",
     description: "Certified solar installer serving Warri and Delta State. Get clean, reliable solar energy for your home or business.",
-    url: "https://bexcel-site.vercel.app",  // Changed to your actual URL
+    url: "https://bexcel-site.vercel.app",
     siteName: "Bexcel Innovations",
     locale: "en_NG",
     type: "website",
@@ -51,11 +51,8 @@ export const metadata = {
     description: "Certified solar installer in Warri, Delta State",
     images: ["/og-image.jpg"],
   },
-  verification: {
-    google: "W43tnDLsC8RYFifviwbv5dLIIeElSR-qyX_FcQPdLfQ",  // Added your verification code
-  },
   alternates: {
-    canonical: "https://bexcel-site.vercel.app",  // Changed to your actual URL
+    canonical: "https://bexcel-site.vercel.app",
   },
   category: "solar energy",
 };
@@ -66,6 +63,8 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {/* GOOGLE VERIFICATION META TAG - ADDED MANUALLY */}
+        <meta name="google-site-verification" content="W43tnDLsC8RYFifviwbv5dLIIeElSR-qyX_FcQPdLfQ" />
       </head>
       <body className={`bg-white text-neutral-900 ${instrumentSans.className}`}>
         <Navbar />
