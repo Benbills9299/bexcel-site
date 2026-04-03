@@ -32,7 +32,7 @@ export const metadata = {
   openGraph: {
     title: "Bexcel Innovations - Professional Solar Installation in Warri",
     description: "Certified solar installer serving Warri and Delta State. Get clean, reliable solar energy for your home or business.",
-    url: "https://bexcel-innovations.vercel.app",
+    url: "https://bexcel-site.vercel.app",  // Changed to your actual URL
     siteName: "Bexcel Innovations",
     locale: "en_NG",
     type: "website",
@@ -52,11 +52,10 @@ export const metadata = {
     images: ["/og-image.jpg"],
   },
   verification: {
-    // Add this after you verify in Google Search Console
-    // google: "YOUR_VERIFICATION_CODE",
+    google: "W43tnDLsC8RYFifviwbv5dLIIeElSR-qyX_FcQPdLfQ",  // Added your verification code
   },
   alternates: {
-    canonical: "https://bexcel-innovations.vercel.app",
+    canonical: "https://bexcel-site.vercel.app",  // Changed to your actual URL
   },
   category: "solar energy",
 };
