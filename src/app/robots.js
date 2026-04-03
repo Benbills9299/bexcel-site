@@ -6,6 +6,6 @@ export default function robots() {
       allow: '/',
       disallow: ['/api/', '/_next/'],
     },
-    sitemap: 'https://bexcel-innovations.vercel.app/sitemap.xml',
+    sitemap: 'https://bexcel-site.vercel.app/sitemap.xml',
   };
 }
