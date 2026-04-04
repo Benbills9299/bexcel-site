@@ -83,7 +83,7 @@ export default function Hero() {
                 </button>
               </Link>
               
-              <Link href="/product" className="block">
+              <Link href="/products" className="block">
                 <button className="rounded-xl border border-white/30 px-8 py-4 text-base font-medium text-white hover:bg-white/5 hover:border-white/50 transition-all duration-300 group w-full sm:w-auto">
                   <span className="flex items-center justify-center gap-2">
                     View Solar Solutions
