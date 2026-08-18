@@ -50,7 +50,7 @@ export const products = [
     id: 'Itel-Power-Tank-1000wh',
     name: 'Itel 1000wh Power Station',
     category: 'powerStations',
-    price: 380000,
+    price: 365000,
     shortDesc: 'High-capacity lithium battery with 10+ years lifespan',
     description: 'Advanced lithium iron phosphate battery with built-in BMS. 6000+ cycle life.',
     images: ['/products/itelpowertank.jpg', '/products/itelpowertank2.jpg'],
@@ -75,7 +75,7 @@ export const products = [
     id: 'Itel-Power-Go-320wh',
     name: 'Itel 320wh Power Station',
     category: 'powerStations',
-    price: 120000,
+    price: 130000,
     shortDesc: 'High-capacity lithium battery with 10+ years lifespan',
     description: 'Advanced lithium iron phosphate battery with built-in BMS. 6000+ cycle life.',
     images: ['/products/itelpowergo.png'],
@@ -100,7 +100,7 @@ export const products = [
     id: 'dc-bulbs',
     name: 'Dc Bulb 9watts',
     category: 'bulbs',
-    price: 10500,
+    price: 12000,
     shortDesc: 'High-quality dc bulb',
     description: 'Long-Lasting 12V DC Bulb – Works Seamlessly with Sunking, Lumos & Other Solar Systems',
     images: ['/products/DCBULBS.png'],
@@ -120,52 +120,4 @@ export const products = [
     tiktokLink: '' // Empty string means no TikTok link for this product
   },
   
-  {
-    id: 'solar-panel-550w',
-    name: 'Solar Panel 550W Monocrystalline',
-    category: 'panels',
-    price: 45000,
-    shortDesc: 'High-efficiency monocrystalline panel',
-    description: 'Premium monocrystalline solar panel with PERC technology and anti-reflective coating.',
-    images: ['https://placehold.co/600x400/1565C0/FFFFFF/png?text=Solar+Panel+550W'],
-    features: [
-      '21.5% Cell Efficiency',
-      'PERC Technology',
-      'Anti-Reflective Coating',
-      'PID Resistance',
-      '12-Year Warranty'
-    ],
-    specs: {
-      'Power': '550W',
-      'Efficiency': '21.5%',
-      'Dimensions': '2278 x 1134 x 35 mm',
-      'Warranty': '12 Years Product',
-      'Performance Warranty': '25 Years'
-    },
-    // ✅ NO TIKTOK LINK - this product won't show the TikTok section
-  },
-  
-  {
-    id: 'inverter-3kva',
-    name: 'Solar Inverter 3KVA',
-    category: 'inverters',
-    price: 85000,
-    shortDesc: 'Compact inverter for small homes',
-    description: 'Reliable 3KVA solar inverter perfect for small households and offices.',
-    images: ['https://placehold.co/600x400/0A2463/FFFFFF/png?text=3KVA+Inverter'],
-    features: [
-      'Pure Sine Wave',
-      'LED Display',
-      'Battery Protection',
-      'Compact Design',
-      'Easy Installation'
-    ],
-    specs: {
-      'Capacity': '3KVA / 2400W',
-      'Battery Voltage': '24V DC',
-      'Solar Input': '150V Max',
-      'Warranty': '2 Years'
-    },
-    // ✅ NO TIKTOK LINK - this product won't show the TikTok section
-  }
 ];

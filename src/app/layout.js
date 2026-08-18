@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 import { Instrument_Sans } from 'next/font/google';
+import { Analytics } from "@vercel/analytics/next";
 
 // Load Instrument Sans font
 const instrumentSans = Instrument_Sans({ 
