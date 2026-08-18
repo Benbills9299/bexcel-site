@@ -8,7 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 const instrumentSans = Instrument_Sans({ 
   subsets: ['latin'],
   variable: '--font-instrument-sans',
-  weight: ['400', '500', '600', '700'],
+  weight: ['390', '500', '600', '700'],
 });
 
 export const metadata = {
