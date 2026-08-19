@@ -11,7 +11,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen bg-neutral-900 text-white overflow-hidden">
+    <section className="relative bg-neutral-900 text-white overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/herobg.jpeg')] bg-cover bg-center bg-no-repeat" 
            aria-label="Professional solar panel installation and electronics by Bexcel Innovations" />
@@ -19,8 +19,8 @@ export default function Hero() {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-neutral-900/50" />
       
-      {/* Content - Centered vertically */}
-      <div className="relative z-10 flex items-center justify-center h-full pt-16 pb-8 md:pt-20 md:pb-12">
+      {/* Content - Full viewport height with navbar offset */}
+      <div className="relative z-10 flex items-center min-h-screen md:min-h-screen pt-20 pb-10 md:pt-28 md:pb-16">
         <div className="w-full px-4 md:px-6 lg:px-12 max-w-7xl mx-auto">
           <div className="max-w-4xl">
             
