@@ -42,10 +42,10 @@ export default function ProductShowcase() {
     portable: [
       {
         id: 1,
-        name: "Lumos L1 + 160watts Panel",
-        capacity: "320hW",
+        name: "Lumos L1 + 160w Panel",
+        capacity: "320Wh",
         features: ["Fast Charging", "Multiple Outputs", "Quiet Operation"],
-        price: "starts from ₦100,000",
+        price: "from ₦100,000",
         image: "/portable-power-1.png",
         slug: "lumos-l1-portable-power",
         category: "Portable Power",
@@ -58,9 +58,9 @@ export default function ProductShowcase() {
       },
       {
         id: 2,
-        name: "Itel Power Tank 500w 1000wh",
+        name: "Itel Power Tank 1000Wh",
         capacity: "1000Wh",
-        features: ["2 Hr Fast Charging", '2 AC Outputs','Lcd Display'],
+        features: ["Fast Charging", "2 AC Outputs", "LCD Display"],
         price: "₦310,000",
         image: "/products/itelpowertank.jpg",
         slug: "Itelpowertank",
@@ -72,8 +72,8 @@ export default function ProductShowcase() {
       {
         id: 3,
         name: "Home Solar Pro",
-        capacity: "1.5kW + System",
-        features: ["Full Home Backup", "Grid-Tie Option", "25-Year Warranty"],
+        capacity: "1.5kW+",
+        features: ["Full Backup", "Grid-Tie", "25-Yr Warranty"],
         price: "From ₦1.5M",
         image: "/custom-system-1.png",
         slug: "",
@@ -83,11 +83,11 @@ export default function ProductShowcase() {
       {
       id: 4,
       name: "Business Solar Max",
-      capacity: "10kW+ Systems",
-      features: ["Commercial Scale", "ROI Calculator", "Energy Monitoring"],
+      capacity: "10kW+",
+      features: ["Commercial", "ROI Calc", "Monitoring"],
       price: "Custom Quote",
       image: "/custom-system-2.png",
-      slug: "business-solar-max", // Keeping slug for reference but we'll use WhatsApp
+      slug: "business-solar-max",
       category: "Custom Systems",
       hasInstallment: false,
       isWhatsappOnly: true 
@@ -132,32 +132,32 @@ export default function ProductShowcase() {
   const consultationLink = `https://wa.me/${whatsappNumber}?text=${consultationMessage}`;
 
   return (
-    <section ref={sectionRef} className="relative py-16 md:py-24 bg-white overflow-hidden">
-      {/* Background Elements - Brand Colors */}
+    <section ref={sectionRef} className="relative py-12 md:py-24 bg-white overflow-hidden">
+      {/* Background Elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#82B708]/5 rounded-full -translate-y-48 translate-x-48 blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#82B708]/5 rounded-full translate-y-48 -translate-x-48 blur-3xl" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-        {/* Section Header */}
-        <div className={`text-center mb-16 transition-all duration-700 ${
+      <div className="relative z-10 max-w-7xl mx-auto px-3 md:px-6 lg:px-12">
+        {/* Section Header - Compact on mobile */}
+        <div className={`text-center mb-8 md:mb-16 transition-all duration-700 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className={`inline-flex items-center gap-2 px-4 py-2 bg-[#82B708]/10 rounded-full mb-4 transition-all duration-700 delay-100 ${
+          <div className={`inline-flex items-center gap-2 px-3 py-1 md:px-4 md:py-2 bg-[#82B708]/10 rounded-full mb-3 md:mb-4 transition-all duration-700 delay-100 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
           }`}>
-            <span className="w-2 h-2 bg-[#82B708] rounded-full animate-pulse"></span>
-            <span className="text-sm font-semibold text-[#82B708]">Our Solutions</span>
+            <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-[#82B708] rounded-full animate-pulse"></span>
+            <span className="text-[10px] md:text-sm font-semibold text-[#82B708]">Our Solutions</span>
           </div>
           
           <div className={`transition-all duration-700 delay-150 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
           }`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#222222] mb-6 leading-tight">
+            <h2 className="text-2xl md:text-4xl font-bold text-[#222222] mb-3 md:mb-6 leading-tight">
               Power That <span className="text-[#82B708]">Fits Your Lifestyle</span>
             </h2>
           </div>
           
-          <div className={`transition-all duration-700 delay-200 ${
+          <div className={`transition-all duration-700 delay-200 hidden md:block ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
           }`}>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -166,83 +166,79 @@ export default function ProductShowcase() {
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className={`flex justify-center mb-12 transition-all duration-700 delay-250 ${
+        {/* Tab Navigation - Compact on mobile */}
+        <div className={`flex justify-center mb-6 md:mb-12 transition-all duration-700 delay-250 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
         }`}>
           <div className="inline-flex p-1 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 shadow-sm">
             <button
               onClick={() => setActiveTab('portable')}
-              className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-3 ${
+              className={`px-3 md:px-8 py-1.5 md:py-3 rounded-lg text-[10px] md:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 md:gap-3 ${
                 activeTab === 'portable'
                   ? 'bg-[#82B708] text-white shadow-sm'
                   : 'text-gray-600 hover:text-[#222222] hover:bg-gray-100'
               }`}
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center ${
                 activeTab === 'portable' ? 'bg-white/20' : 'bg-[#82B708]/10'
               }`}>
-                <FaBolt className={activeTab === 'portable' ? 'text-white' : 'text-[#82B708]'} />
+                <FaBolt className={`text-[10px] md:text-base ${activeTab === 'portable' ? 'text-white' : 'text-[#82B708]'}`} />
               </div>
-              <span>Portable Power</span>
+              <span>Portable</span>
             </button>
             
             <button
               onClick={() => setActiveTab('custom')}
-              className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all duration-300 flex items-center gap-3 ${
+              className={`px-3 md:px-8 py-1.5 md:py-3 rounded-lg text-[10px] md:text-sm font-semibold transition-all duration-300 flex items-center gap-1.5 md:gap-3 ${
                 activeTab === 'custom'
                   ? 'bg-[#82B708] text-white shadow-sm'
                   : 'text-gray-600 hover:text-[#222222] hover:bg-gray-100'
               }`}
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              <div className={`w-5 h-5 md:w-8 md:h-8 rounded-full flex items-center justify-center ${
                 activeTab === 'custom' ? 'bg-white/20' : 'bg-[#82B708]/10'
               }`}>
-                <FaSolarPanel className={activeTab === 'custom' ? 'text-white' : 'text-[#82B708]'} />
+                <FaSolarPanel className={`text-[10px] md:text-base ${activeTab === 'custom' ? 'text-white' : 'text-[#82B708]'}`} />
               </div>
-              <span>Custom Systems</span>
+              <span>Custom</span>
             </button>
           </div>
         </div>
 
-        {/* Products Grid */}
-        <div className={`grid lg:grid-cols-2 gap-8 transition-all duration-700 delay-300 ${
+        {/* Products Grid - Side by side on mobile */}
+        <div className={`grid grid-cols-2 gap-2 md:gap-6 transition-all duration-700 delay-300 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
         }`}>
           {products[activeTab].map((product, index) => (
             <div
               key={product.id}
-              className={`group relative rounded-2xl bg-gradient-to-br from-white to-[#82B708]/5 p-6 border border-[#82B708]/20 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${
+              className={`group relative rounded-xl md:rounded-2xl bg-gradient-to-br from-white to-[#82B708]/5 p-2 md:p-6 border border-[#82B708]/20 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 md:hover:-translate-y-2 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${350 + index * 100}ms` }}
             >
-              {/* Product Header */}
-              <div className="relative mb-6">
-                <div className="flex justify-between items-start">
+              {/* Product Header - Compact */}
+              <div className="relative mb-1.5 md:mb-6">
+                <div className="flex flex-col">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#82B708]/10 rounded-full mb-3">
-                      <span className="w-2 h-2 bg-[#82B708] rounded-full"></span>
-                      <span className="text-xs font-semibold text-[#82B708]">
+                    <div className="inline-flex items-center gap-1 px-1.5 py-0.5 md:px-3 md:py-1 bg-[#82B708]/10 rounded-full mb-0.5 md:mb-3">
+                      <span className="w-1 h-1 md:w-2 md:h-2 bg-[#82B708] rounded-full"></span>
+                      <span className="text-[6px] md:text-xs font-semibold text-[#82B708]">
                         {product.category}
                       </span>
                     </div>
-                    <h3 className="text-2xl font-bold text-[#222222]">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                      {activeTab === 'portable' ? 'Take power anywhere' : 'Designed for your space'}
-                    </p>
+                    <h3 className="text-[10px] leading-tight sm:text-xs md:text-2xl font-bold text-[#222222] line-clamp-2">{product.name}</h3>
                   </div>
                   
                   {/* Price Tag */}
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-[#222222]">{product.price}</div>
+                  <div className="mt-0.5 md:mt-0">
+                    <div className="text-[8px] sm:text-[10px] md:text-2xl font-bold text-[#222222]">{product.price}</div>
                   </div>
                 </div>
               </div>
               
-              {/* Image Container */}
-              <div className="relative h-56 rounded-xl overflow-hidden mb-4">
-                {/* Product Image Link */}
+              {/* Image Container - Smaller on mobile */}
+              <div className="relative h-16 sm:h-20 md:h-56 rounded-lg md:rounded-xl overflow-hidden mb-1.5 md:mb-4">
                 <Link href={`/products/${product.slug}`} className="block absolute inset-0 z-10">
                   <Image
                     src={product.image}
@@ -251,98 +247,88 @@ export default function ProductShowcase() {
                     className={`object-cover transition-all duration-700 ${
                       imageLoaded[product.id] ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
                     } group-hover:scale-110`}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 50vw, 600px"
                     onLoad={() => setImageLoaded(prev => ({ ...prev, [product.id]: true }))}
                   />
                 </Link>
                 
-                {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-black/20 z-20 pointer-events-none" />
                 
                 {/* Capacity Badge */}
-                <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm text-[#222222] text-sm font-bold px-3 py-2 rounded-lg shadow-md border border-[#82B708]/30 z-30 pointer-events-none">
+                <div className="absolute bottom-0.5 right-0.5 md:bottom-4 md:right-4 bg-white/95 backdrop-blur-sm text-[#222222] text-[6px] md:text-sm font-bold px-1 py-0.5 md:px-3 md:py-2 rounded shadow-md border border-[#82B708]/30 z-30 pointer-events-none">
                   {product.capacity}
                 </div>
                 
                 {/* Installment Badge */}
                 {product.hasInstallment && (
-                  <div className="absolute top-4 left-4 bg-[#82B708] text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-md z-30 pointer-events-none">
-                    <FaCreditCard className="text-xs" />
-                    <span>Pay in Installments</span>
+                  <div className="absolute top-0.5 left-0.5 md:top-4 md:left-4 bg-[#82B708] text-white text-[5px] md:text-xs font-bold px-1 py-0.5 md:px-3 md:py-1.5 rounded-full flex items-center gap-0.5 shadow-md z-30 pointer-events-none">
+                    <FaCreditCard className="text-[4px] md:text-xs" />
+                    <span className="hidden sm:inline">Pay in Installments</span>
+                    <span className="sm:hidden">Install</span>
                   </div>
                 )}
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center z-40 pointer-events-none">
-                  <span className="bg-white text-[#222222] font-semibold px-8 py-4 rounded-lg shadow-xl transform group-hover:scale-110 transition-all duration-300 border-2 border-[#82B708]/30">
-                    View Details →
-                  </span>
-                </div>
               </div>
 
-              {/* INSTALLMENT BUTTON - FIXED */}
-              {product.hasInstallment && (
-                <div className="mb-4">
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      console.log('Button clicked for product:', product.id);
-                      toggleInstallment(product.id);
-                    }}
-                    className={`w-full border-2 ${
-                      showInstallment[product.id] 
-                        ? 'bg-[#82B708] text-white border-[#82B708]' 
-                        : 'bg-transparent border-[#82B708] text-[#82B708] hover:bg-[#82B708] hover:text-white'
-                    } font-semibold py-3 px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer relative z-50`}
-                  >
-                    <FaCreditCard className={`text-lg ${showInstallment[product.id] ? 'text-white' : 'text-[#82B708] group-hover/install-btn:text-white'}`} />
-                    <span>
-                      {showInstallment[product.id] ? 'Hide Installment Plans' : 'View Installment Plans'}
-                    </span>
-                  </button>
-                </div>
-              )}
-              
-              {/* Features */}
-              <div className="mb-6">
-                <div className="grid grid-cols-3 gap-3">
+              {/* Features - Compact on mobile */}
+              <div className="mb-1.5 md:mb-6">
+                <div className="grid grid-cols-3 gap-0.5 md:gap-3">
                   {product.features.map((feature, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-2 p-3 rounded-lg bg-white/50 backdrop-blur-sm border border-[#82B708]/20"
+                      className="flex items-center gap-0.5 md:gap-2 p-0.5 md:p-3 rounded bg-white/50 backdrop-blur-sm border border-[#82B708]/20"
                     >
-                      <div className="w-6 h-6 rounded-full bg-[#82B708]/20 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xs font-bold text-[#82B708]">✓</span>
+                      <div className="w-3 h-3 md:w-6 md:h-6 rounded-full bg-[#82B708]/20 flex items-center justify-center flex-shrink-0">
+                        <span className="text-[4px] md:text-xs font-bold text-[#82B708]">✓</span>
                       </div>
-                      <span className="text-xs font-medium text-[#222222] truncate">{feature}</span>
+                      <span className="text-[5px] md:text-xs font-medium text-[#222222] truncate">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
               
-              {/* Installment Plans - Shows when button is clicked */}
+              {/* Installment Button - Compact */}
+              {product.hasInstallment && (
+                <div className="mb-1.5 md:mb-4">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleInstallment(product.id);
+                    }}
+                    className={`w-full border text-[6px] md:text-base ${
+                      showInstallment[product.id] 
+                        ? 'bg-[#82B708] text-white border-[#82B708]' 
+                        : 'bg-transparent border-[#82B708] text-[#82B708] hover:bg-[#82B708] hover:text-white'
+                    } font-semibold py-0.5 md:py-3 px-1 md:px-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-0.5 md:gap-2 cursor-pointer relative z-50`}
+                  >
+                    <FaCreditCard className={`text-[8px] md:text-lg ${showInstallment[product.id] ? 'text-white' : 'text-[#82B708]'}`} />
+                    <span className="hidden sm:inline">{showInstallment[product.id] ? 'Hide Plans' : 'View Plans'}</span>
+                    <span className="sm:hidden">{showInstallment[product.id] ? 'Hide' : 'Plans'}</span>
+                  </button>
+                </div>
+              )}
+              
+              {/* Installment Plans - Compact */}
               {product.hasInstallment && showInstallment[product.id] && (
-                <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-[#82B708]/20 animate-fadeIn">
-                  <div className="flex items-center gap-2 mb-3">
-                    <FaCalendarAlt className="text-[#82B708] text-sm" />
-                    <span className="text-sm font-semibold text-[#222222]">Flexible Payment Plans</span>
+                <div className="mb-1.5 md:mb-6 p-1 md:p-4 bg-gray-50 rounded border border-[#82B708]/20 animate-fadeIn">
+                  <div className="flex items-center gap-0.5 md:gap-2 mb-0.5 md:mb-3">
+                    <FaCalendarAlt className="text-[#82B708] text-[6px] md:text-sm" />
+                    <span className="text-[6px] md:text-sm font-semibold text-[#222222]">Flexible Plans</span>
                   </div>
                   
-                  <div className="bg-[#82B708]/10 p-3 rounded-lg mb-3">
-                    <div className="text-xs text-gray-600 mb-1">First Payment (Covers Month 1)</div>
-                    <div className="text-xl font-bold text-[#82B708]">
+                  <div className="bg-[#82B708]/10 p-0.5 md:p-3 rounded mb-0.5 md:mb-3">
+                    <div className="text-[5px] md:text-xs text-gray-600 mb-0.5">First Payment</div>
+                    <div className="text-[8px] md:text-xl font-bold text-[#82B708]">
                       ₦{product.installmentPlans[0].firstPayment.toLocaleString()}
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-3 gap-2 mb-3">
+                  <div className="grid grid-cols-3 gap-0.5 md:gap-2 mb-0.5 md:mb-3">
                     {product.installmentPlans.map((plan, idx) => (
-                      <div key={idx} className="text-center p-2 bg-white rounded-md border border-gray-200">
-                        <div className="text-xs font-bold text-[#82B708]">{plan.months} months</div>
-                        <div className="text-sm font-bold text-[#222222]">₦{plan.monthly.toLocaleString()}</div>
-                        <div className="text-[10px] text-gray-500">per month</div>
+                      <div key={idx} className="text-center p-0.5 md:p-2 bg-white rounded border border-gray-200">
+                        <div className="text-[5px] md:text-xs font-bold text-[#82B708]">{plan.months}m</div>
+                        <div className="text-[6px] md:text-sm font-bold text-[#222222]">₦{plan.monthly.toLocaleString()}</div>
                       </div>
                     ))}
                   </div>
@@ -351,26 +337,26 @@ export default function ProductShowcase() {
                     href={getInstallmentWhatsappLink(product, product.installmentPlans[0])}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-[#82B708] hover:bg-[#6B9606] text-white text-center py-2 rounded-lg text-xs font-medium transition-all"
+                    className="block w-full bg-[#82B708] hover:bg-[#6B9606] text-white text-center py-0.5 md:py-2 rounded text-[6px] md:text-xs font-medium transition-all"
                   >
-                    <span className="flex items-center justify-center gap-2">
-                      <FaWhatsapp />
-                      Apply for Installment Plan
+                    <span className="flex items-center justify-center gap-0.5 md:gap-2">
+                      <FaWhatsapp className="text-[6px] md:text-base" />
+                      Apply
                     </span>
                   </a>
                 </div>
               )}
               
-              {/* Action Buttons */}
-              <div className="flex gap-3">
+              {/* Action Buttons - Compact */}
+              <div className="flex gap-0.5 md:gap-3">
                 <Link 
                   href={`/products/${product.slug}`}
                   className="group/btn flex-1 block"
                 >
-                  <button className="w-full bg-[#82B708] hover:bg-[#6B9606] text-white font-semibold py-3 rounded-lg transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl">
-                    <span className="flex items-center justify-center gap-2">
-                      {activeTab === 'portable' ? 'Buy Now' : 'Get Quote'}
-                      <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="w-full bg-[#82B708] hover:bg-[#6B9606] text-white font-semibold py-0.5 md:py-3 rounded-lg transition-all duration-300 text-[6px] md:text-base">
+                    <span className="flex items-center justify-center gap-0.5 md:gap-2">
+                      {activeTab === 'portable' ? 'Buy' : 'Quote'}
+                      <svg className="w-2 h-2 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </span>
@@ -381,10 +367,9 @@ export default function ProductShowcase() {
                   href={getWhatsappLink(product)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-3 border border-[#82B708]/30 hover:bg-[#82B708]/10 rounded-lg transition-colors group/whatsapp"
-                  title="Order via WhatsApp"
+                  className="px-1 md:px-4 py-0.5 md:py-3 border border-[#82B708]/30 hover:bg-[#82B708]/10 rounded-lg transition-colors flex items-center"
                 >
-                  <FaWhatsapp className="w-5 h-5 text-[#82B708] group-hover/whatsapp:scale-110 transition-transform" />
+                  <FaWhatsapp className="w-2.5 h-2.5 md:w-5 md:h-5 text-[#82B708]" />
                 </a>
               </div>
             </div>
@@ -392,12 +377,12 @@ export default function ProductShowcase() {
         </div>
 
         {/* View All Products Link */}
-        <div className={`mt-12 text-center transition-all duration-700 delay-450 ${
+        <div className={`mt-8 md:mt-12 text-center transition-all duration-700 delay-450 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
           <Link 
             href="/products" 
-            className="inline-flex items-center gap-2 text-[#82B708] hover:text-[#6B9606] font-semibold group"
+            className="inline-flex items-center gap-2 text-[#82B708] hover:text-[#6B9606] font-semibold text-sm md:text-base group"
           >
             View All Products
             <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -407,43 +392,41 @@ export default function ProductShowcase() {
         </div>
 
         {/* Trust Section */}
-        <div className={`mt-16 transition-all duration-700 delay-500 ${
+        <div className={`mt-12 md:mt-16 transition-all duration-700 delay-500 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
         }`}>
-          <div className="bg-gradient-to-br from-white to-[#82B708]/5 rounded-2xl p-8 border border-[#82B708]/20">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-[#82B708]/20">
-                <div className="text-3xl font-bold text-[#222222] mb-2">500+</div>
-                <div className="text-sm font-medium text-gray-600">Systems Deployed</div>
-                <div className="mt-2 text-xs text-[#82B708]">Across Nigeria</div>
+          <div className="bg-gradient-to-br from-white to-[#82B708]/5 rounded-2xl p-4 md:p-8 border border-[#82B708]/20">
+            <div className="grid grid-cols-3 md:grid-cols-3 gap-3 md:gap-8">
+              <div className="text-center p-2 md:p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-[#82B708]/20">
+                <div className="text-lg md:text-3xl font-bold text-[#222222] mb-0.5 md:mb-2">500+</div>
+                <div className="text-[8px] md:text-sm font-medium text-gray-600">Systems</div>
               </div>
               
-              <div className="text-center p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-[#82B708]/20">
-                <div className="text-3xl font-bold text-[#222222] mb-2">4.9★</div>
-                <div className="text-sm font-medium text-gray-600">Customer Rating</div>
-                <div className="mt-2 text-xs text-[#82B708]">Based on 247 reviews</div>
+              <div className="text-center p-2 md:p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-[#82B708]/20">
+                <div className="text-lg md:text-3xl font-bold text-[#222222] mb-0.5 md:mb-2">4.9★</div>
+                <div className="text-[8px] md:text-sm font-medium text-gray-600">Rating</div>
               </div>
               
-              <div className="text-center p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-[#82B708]/20">
-                <div className="text-3xl font-bold text-[#222222] mb-2"></div>
-                <div className="text-sm font-medium text-gray-600">Support Available</div>
-                <div className="mt-2 text-xs text-[#82B708]">Nationwide coverage</div>
+              <div className="text-center p-2 md:p-6 rounded-xl bg-white/80 backdrop-blur-sm border border-[#82B708]/20">
+                <div className="text-lg md:text-3xl font-bold text-[#222222] mb-0.5 md:mb-2">24/7</div>
+                <div className="text-[8px] md:text-sm font-medium text-gray-600">Support</div>
               </div>
             </div>
             
-            {/* CTA Button - UPDATED to WhatsApp */}
-            <div className="mt-10 pt-8 border-t border-[#82B708]/20 text-center">
+            {/* CTA Button */}
+            <div className="mt-6 md:mt-10 pt-4 md:pt-8 border-t border-[#82B708]/20 text-center">
               <a
                 href={consultationLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block"
+                className="inline-block w-full md:w-auto"
               >
-                <button className="group relative rounded-full bg-[#82B708] px-8 py-4 text-base font-bold text-white hover:bg-[#6B9606] transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                <button className="group relative rounded-full bg-[#82B708] px-4 py-2 md:px-8 md:py-4 text-xs md:text-base font-bold text-white hover:bg-[#6B9606] transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl w-full md:w-auto">
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    <FaWhatsapp className="w-5 h-5" />
-                    Get Your Custom Solution
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <FaWhatsapp className="w-3 h-3 md:w-5 md:h-5" />
+                    <span className="hidden sm:inline">Get Your Custom Solution</span>
+                    <span className="sm:hidden">Get Solution</span>
+                    <svg className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </span>
@@ -451,29 +434,20 @@ export default function ProductShowcase() {
                 </button>
               </a>
               
-              <p className="mt-6 text-sm text-gray-500">
-                <span className="font-medium text-[#82B708]">Expert Consultation:</span> Our solar engineers will design the perfect system for your needs
+              <p className="mt-3 md:mt-6 text-xs md:text-sm text-gray-500">
+                <span className="font-medium text-[#82B708]">Expert Consultation:</span> Perfect system for your needs
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Add this to your global CSS or create a style tag */}
       <style jsx>{`
         @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out;
-        }
+        .animate-fadeIn { animation: fadeIn 0.3s ease-out; }
       `}</style>
     </section>
   );

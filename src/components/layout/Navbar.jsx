@@ -149,7 +149,8 @@ const Navbar = () => {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 font-sans ${getNavbarBackground()}`}>
       <div className="w-full px-6 md:px-8 lg:px-12 max-w-7xl mx-auto">
         
-        <div className="flex justify-between items-center py-2 md:py-3">
+        {/* ✅ INCREASED PADDING HERE */}
+        <div className="flex justify-between items-center py-4 md:py-5">
           
           {/* Logo */}
           <div className="flex items-center z-50">
@@ -157,7 +158,7 @@ const Navbar = () => {
               <img
                 src="/logo.svg"
                 alt="Bexcel Innovations Logo"
-                className={`h-7 md:h-8 cursor-pointer transition-all duration-300 ${getLogoBrightness()}`}
+                className={`h-8 md:h-10 cursor-pointer transition-all duration-300 ${getLogoBrightness()}`}
               />
             </Link>
           </div>
