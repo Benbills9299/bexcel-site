@@ -38,7 +38,7 @@ export default function ProductsClient({
   return (
     <>
       {/* Search Bar */}
-      <div className="mb-8">
+      <div className="mb-6 md:mb-8">
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
             <input
@@ -46,19 +46,19 @@ export default function ProductsClient({
               placeholder="Search products by name or description..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-4 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#82B708]/50 focus:border-[#82B708] text-sm bg-white"
+              className="w-full pl-4 pr-4 py-2.5 md:py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#82B708]/50 focus:border-[#82B708] text-sm bg-white"
             />
           </div>
         </div>
       </div>
       
       {/* Category Filters - Without Counts */}
-      <div className="flex flex-wrap items-center gap-2 mb-8 p-4 bg-white rounded-lg border border-gray-200">
-        <span className="text-sm font-medium text-gray-700 mr-2">Categories:</span>
+      <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mb-6 md:mb-8 p-3 md:p-4 bg-white rounded-lg border border-gray-200">
+        <span className="text-xs md:text-sm font-medium text-gray-700 mr-1 md:mr-2">Categories:</span>
         
         <button
           onClick={() => setActiveCategory('all')}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+          className={`px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all cursor-pointer ${
             activeCategory === 'all'
               ? 'bg-[#82B708] text-white shadow-sm'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -71,7 +71,7 @@ export default function ProductsClient({
           <button
             key={category}
             onClick={() => setActiveCategory(category)}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-1 cursor-pointer ${
+            className={`px-2.5 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium transition-all flex items-center gap-1 cursor-pointer ${
               activeCategory === category
                 ? 'bg-[#82B708] text-white shadow-sm'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -84,12 +84,12 @@ export default function ProductsClient({
       </div>
       
       {/* Results Header */}
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-wrap items-center justify-between gap-2 mb-4 md:mb-6">
         <div>
-          <h2 className="text-xl font-bold text-[#222222]">
+          <h2 className="text-lg md:text-xl font-bold text-[#222222]">
             {activeCategory === 'all' ? 'All Products' : (categoryNames[activeCategory] || activeCategory)}
           </h2>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs md:text-sm text-gray-500 mt-0.5 md:mt-1">
             Showing <span className="font-medium text-[#82B708]">{filteredProducts.length}</span> of {products.length} products
             {searchQuery && ` matching "${searchQuery}"`}
           </p>
@@ -97,16 +97,16 @@ export default function ProductsClient({
         {activeCategory !== 'all' && (
           <button 
             onClick={() => setActiveCategory('all')}
-            className="text-sm text-[#82B708] hover:text-[#6B9606] transition-colors"
+            className="text-xs md:text-sm text-[#82B708] hover:text-[#6B9606] transition-colors"
           >
             Clear filter ×
           </button>
         )}
       </div>
       
-      {/* Products Grid */}
+      {/* ✅ Products Grid - Mobile Friendly: 2 columns on mobile, 2 on tablet, 3 on desktop */}
       {hasFilteredProducts ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
           {filteredProducts.map((product, index) => (
             <ProductCard 
               key={product._id} 
@@ -117,13 +117,13 @@ export default function ProductsClient({
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
-          <div className="text-5xl mb-4 text-gray-300">🔍</div>
-          <h3 className="text-lg font-semibold text-[#222222] mb-2">No products found</h3>
-          <p className="text-gray-500 mb-6">We couldn't find any products matching your criteria.</p>
+        <div className="text-center py-12 md:py-16 bg-white rounded-lg border border-gray-200">
+          <div className="text-4xl md:text-5xl mb-4 text-gray-300">🔍</div>
+          <h3 className="text-base md:text-lg font-semibold text-[#222222] mb-2">No products found</h3>
+          <p className="text-sm text-gray-500 mb-6">We couldn't find any products matching your criteria.</p>
           <button 
             onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}
-            className="px-6 py-2.5 bg-[#82B708] hover:bg-[#6B9606] text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md"
+            className="px-5 py-2 md:px-6 md:py-2.5 bg-[#82B708] hover:bg-[#6B9606] text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md"
           >
             View All Products
           </button>
@@ -131,27 +131,29 @@ export default function ProductsClient({
       )}
       
       {/* Need Help Section */}
-      <div className="mt-16 bg-white rounded-lg border border-gray-200 p-6 md:p-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <h3 className="text-lg font-semibold text-[#222222] mb-1">Need help choosing the right product?</h3>
-            <p className="text-sm text-gray-600">Our solar experts are ready to assist you with personalized recommendations.</p>
+      <div className="mt-12 md:mt-16 bg-white rounded-lg border border-gray-200 p-4 md:p-6 lg:p-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
+          <div className="text-center md:text-left">
+            <h3 className="text-base md:text-lg font-semibold text-[#222222] mb-1">Need help choosing the right product?</h3>
+            <p className="text-xs md:text-sm text-gray-600">Our solar experts are ready to assist you with personalized recommendations.</p>
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2 md:gap-3">
             <a
               href="https://wa.me/2348123589191"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-2.5 bg-[#82B708] hover:bg-[#6B9606] text-white rounded-lg text-sm font-medium transition-all flex items-center gap-2 shadow-sm hover:shadow-md"
+              className="px-4 py-2 md:px-5 md:py-2.5 bg-[#82B708] hover:bg-[#6B9606] text-white rounded-lg text-xs md:text-sm font-medium transition-all flex items-center gap-2 shadow-sm hover:shadow-md"
             >
-              <FaWhatsapp className="text-base" />
-              Chat on WhatsApp
+              <FaWhatsapp className="text-sm md:text-base" />
+              <span className="hidden xs:inline">Chat on WhatsApp</span>
+              <span className="xs:hidden">WhatsApp</span>
             </a>
             <a
               href="tel:+2348123589191"
-              className="px-5 py-2.5 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 rounded-lg text-sm font-medium transition-all"
+              className="px-4 py-2 md:px-5 md:py-2.5 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 rounded-lg text-xs md:text-sm font-medium transition-all"
             >
-              Call Us
+              <span className="hidden xs:inline">Call Us</span>
+              <span className="xs:hidden">Call</span>
             </a>
           </div>
         </div>
