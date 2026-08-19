@@ -50,7 +50,7 @@ export const products = [
     id: 'Itel-Power-Tank-1000wh',
     name: 'Itel 1000wh Power Station',
     category: 'powerStations',
-    price: 365000,
+    price: 310000,
     shortDesc: 'High-capacity lithium battery with 10+ years lifespan',
     description: 'Advanced lithium iron phosphate battery with built-in BMS. 6000+ cycle life.',
     images: ['/products/itelpowertank.jpg', '/products/itelpowertank2.jpg'],

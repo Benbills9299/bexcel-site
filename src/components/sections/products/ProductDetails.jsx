@@ -5,7 +5,7 @@ import {
   FaWhatsapp, FaPhone, FaCheck, FaTruck, FaShieldAlt, 
   FaStar, FaBolt, FaBatteryFull, FaSolarPanel, FaBox,
   FaCreditCard, FaCalendarAlt, FaCheckCircle, FaChevronLeft, FaChevronRight,
-  FaGift, FaStarHalf, FaTiktok, FaVideo
+  FaGift, FaStarHalf
 } from 'react-icons/fa';
 import { whatsappNumber, whatsappMessage } from '@/data/products';
 import Link from 'next/link';
@@ -182,18 +182,20 @@ export default function ProductDetails({ product }) {
                 </div>
               )}
               
-              {/* ✅ TIKTOK VIDEO LINK - Only shows if product has tiktokLink */}
-              {product.tiktokLink && (
+              {/* ✅ YOUTUBE VIDEO LINK - Only shows if product has youtubeLink */}
+              {product.youtubeLink && (
                 <div className="mt-6">
                   <a
-                    href={product.tiktokLink}
+                    href={product.youtubeLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-between bg-gradient-to-r from-gray-900 to-black hover:from-black hover:to-gray-900 text-white p-4 rounded-xl border border-gray-800 transition-all transform hover:scale-[1.02] shadow-lg group"
+                    className="flex items-center justify-between bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white p-4 rounded-xl border border-red-500/30 transition-all transform hover:scale-[1.02] shadow-lg group"
                   >
                     <div className="flex items-center gap-3">
                       <div className="bg-white/10 p-2 rounded-lg group-hover:bg-white/20 transition-all">
-                        <FaTiktok className="text-2xl" />
+                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
                       </div>
                       <div>
                         <div className="font-bold text-base md:text-lg flex items-center gap-2">
@@ -202,9 +204,11 @@ export default function ProductDetails({ product }) {
                             LIVE
                           </span>
                         </div>
-                        <p className="text-xs md:text-sm text-gray-300 flex items-center gap-1">
-                          <FaVideo className="text-xs" />
-                          See {product.name} in action on TikTok
+                        <p className="text-xs md:text-sm text-white/80 flex items-center gap-1">
+                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M10 0v24L0 12 10 0z"/>
+                          </svg>
+                          See {product.name} in action on YouTube
                         </p>
                       </div>
                     </div>
@@ -244,7 +248,7 @@ export default function ProductDetails({ product }) {
                 {/* Price Section */}
                 <div className="flex items-baseline gap-3 md:gap-4 mb-4 md:mb-6">
                   <span className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#82B708]">
-                    ₦{product.price.toLocaleString()}
+                    ₦{product.price}
                   </span>
                   {product.savings && (
                     <span className="text-sm md:text-base text-gray-500 line-through">
@@ -490,7 +494,7 @@ export default function ProductDetails({ product }) {
             </div>
             <div>
               <h4 className="font-bold text-[#222222] text-base md:text-lg">Nationwide Delivery</h4>
-              <p className="text-xs md:text-sm text-gray-700">3-7 business days • Free delivery within Lagos</p>
+              <p className="text-xs md:text-sm text-gray-700">3-7 business days </p>
             </div>
           </div>
           <div className="bg-gradient-to-r from-gray-50 to-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-gray-200 flex items-center gap-3 md:gap-4">

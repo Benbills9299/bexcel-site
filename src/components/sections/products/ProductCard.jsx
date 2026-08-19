@@ -11,18 +11,30 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
   const [imageError, setImageError] = useState({});
   const [showInstallment, setShowInstallment] = useState(false);
   
+  // Handle both Sanity and local product formats
+  const productId = product._id || product.id;
+  const productSlug = product.id || product._id;
+  
   const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
     `${whatsappMessage} ${product.name} - ${product.price}\n\nI'm interested in this product. Please provide more information.`
   )}`;
   
-  const defaultImage = `https://placehold.co/600x400/222222/82B708/png?text=${encodeURIComponent(product.name.substring(0, 20))}`;
+  const defaultImage = `https://placehold.co/600x400/222222/82B708/png?text=${encodeURIComponent(product.name?.substring(0, 20) || 'Product')}`;
   
-  // ✅ FIXED: Check images array FIRST (since your data uses 'images')
+  // Get image source - handles both Sanity and local data
   const getImageSrc = () => {
-    if (imageError[product.id]) {
+    if (imageError[productId]) {
       return defaultImage;
     }
-    return product.images?.[0] || product.image;
+    // Sanity image (string URL)
+    if (product.image && typeof product.image === 'string') {
+      return product.image;
+    }
+    // Local data images array
+    if (product.images && product.images.length > 0) {
+      return product.images[0];
+    }
+    return defaultImage;
   };
 
   const getCategoryIcon = () => {
@@ -38,9 +50,8 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
     }
   };
 
-  // ✅ INSTALLMENT PLANS for Lumos L1
+  // Installment plans - only for Lumos L1
   const getInstallmentPlans = () => {
-    // Only show for Lumos L1
     if (product.name === 'Lumos L1' || product.id === 'lumos-l1-portable-power') {
       return [
         { months: 12, monthly: 39700, total: 576400, firstPayment: 100000 },
@@ -52,8 +63,10 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
   };
 
   const installmentPlans = getInstallmentPlans();
-  const rating = (4 + Math.random()).toFixed(1);
-  const reviews = Math.floor(Math.random() * 50) + 20;
+  
+  // Use rating from Sanity or fallback
+  const rating = product.rating ? product.rating.toFixed(1) : (4 + Math.random()).toFixed(1);
+  const reviews = product.reviews || Math.floor(Math.random() * 50) + 20;
   
   return (
     <div 
@@ -62,24 +75,22 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
       }`}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      <Link href={`/products/${product.slug || product.id}`} className="block relative">
+      <Link href={`/products/${productSlug}`} className="block relative">
         <div className="relative h-48 bg-gray-50 rounded-t-lg overflow-hidden">
-          <Image
+          <img
             src={getImageSrc()}
-            alt={product.name}
-            fill
-            className={`object-contain p-4 transition-all duration-500 ${
-              imageLoaded[product.id] ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
+            alt={product.name || 'Product'}
+            className={`w-full h-full object-contain p-4 transition-all duration-500 ${
+              imageLoaded[productId] ? 'opacity-100 scale-100' : 'opacity-0 scale-110'
             } group-hover:scale-105`}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
             onLoad={() => {
-              setImageLoaded(prev => ({ ...prev, [product.id]: true }));
-              setImageError(prev => ({ ...prev, [product.id]: false }));
+              setImageLoaded(prev => ({ ...prev, [productId]: true }));
+              setImageError(prev => ({ ...prev, [productId]: false }));
             }}
             onError={() => {
-              console.error(`Failed to load image for ${product.name}:`, product.images?.[0] || product.image);
-              setImageError(prev => ({ ...prev, [product.id]: true }));
-              setImageLoaded(prev => ({ ...prev, [product.id]: true }));
+              console.error(`Failed to load image for ${product.name}:`, getImageSrc());
+              setImageError(prev => ({ ...prev, [productId]: true }));
+              setImageLoaded(prev => ({ ...prev, [productId]: true }));
             }}
           />
           
@@ -88,14 +99,16 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
             <span className="capitalize text-gray-700">{product.category}</span>
           </div>
           
-          <div className="absolute bottom-3 right-3 bg-[#82B708]/90 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-md shadow-sm">
-            {product.capacity}
-          </div>
+          {product.capacity && (
+            <div className="absolute bottom-3 right-3 bg-[#82B708]/90 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-md shadow-sm">
+              {product.capacity}
+            </div>
+          )}
         </div>
       </Link>
       
       <div className="p-4">
-        <Link href={`/products/${product.slug || product.id}`}>
+        <Link href={`/products/${productSlug}`}>
           <h3 className="text-base font-semibold text-[#222222] hover:text-[#82B708] line-clamp-2 mb-1 transition-colors">
             {product.name}
           </h3>
@@ -131,7 +144,6 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
               )}
             </div>
             
-            {/* Installment Toggle - Only for Lumos L1 */}
             {installmentPlans && (
               <button
                 onClick={() => setShowInstallment(!showInstallment)}
@@ -144,7 +156,7 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
           </div>
         </div>
         
-        {/* ✅ INSTALLMENT PLANS - Only for Lumos L1 */}
+        {/* Installment Plans */}
         {installmentPlans && showInstallment && (
           <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
             <div className="flex items-center gap-2 mb-2">
@@ -183,7 +195,7 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
             </a>
             
             <Link
-              href={`/products/${product.slug || product.id}`}
+              href={`/products/${productSlug}`}
               className="px-3 py-1.5 bg-[#82B708] hover:bg-[#6B9606] text-white text-xs font-medium rounded-md transition-colors flex items-center gap-1"
             >
               <span>View</span>
@@ -191,7 +203,6 @@ export default function ProductCard({ product, isVisible = true, delay = 0 }) {
             </Link>
           </div>
           
-          {/* Installment Badge - Always visible */}
           {installmentPlans && (
             <div className="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-full">
               0% Interest

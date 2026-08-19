@@ -61,9 +61,9 @@ export default function ProductShowcase() {
         name: "Itel Power Tank 500w 1000wh",
         capacity: "1000Wh",
         features: ["2 Hr Fast Charging", '2 AC Outputs','Lcd Display'],
-        price: "₦380,000",
+        price: "₦310,000",
         image: "/products/itelpowertank.jpg",
-        slug: "Itel-Power-Tank-1000wh",
+        slug: "Itelpowertank",
         category: "Portable Power",
         hasInstallment: false
       }

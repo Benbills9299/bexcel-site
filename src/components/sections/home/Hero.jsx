@@ -12,11 +12,11 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen bg-neutral-900 text-white">
-      {/* Background Image with optimized alt text */}
+      {/* Background Image */}
       <div className="absolute inset-0 bg-[url('/herobg.jpeg')] bg-cover bg-center bg-no-repeat" 
-           aria-label="Professional solar panel installation by Bexcel Innovations" />
+           aria-label="Professional solar panel installation and electronics by Bexcel Innovations" />
       
-      {/* Enhanced Gradient Overlay */}
+      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-neutral-900/50" />
       
       {/* Content */}
@@ -24,57 +24,59 @@ export default function Hero() {
         <div className="w-full px-6 md:px-8 lg:px-12 max-w-7xl mx-auto">
           <div className="pl-0 md:pl-0 lg:pl-0 max-w-4xl">
             
-            {/* Modern Heading - Clean, strategic keyword placement */}
+            {/* Modern Heading */}
             <div className={`transition-all duration-700 ease-out ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
                 <span className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></span>
-                <span className="text-sm font-medium text-lime-300">Premium Solar Solutions Nigeria</span>
+                <span className="text-sm font-medium text-lime-300">Solar & Electronics Store • Warri, Delta State</span>
               </div>
               
-              {/* Main heading - One strategic mention */}
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-[1.15] tracking-tight">
-                Smart Solar Power for <span className="text-lime-300">Homes</span> & <span className="text-lime-300">Businesses</span> Across Nigeria
+                <span className="text-lime-300">Solar Power</span> &{' '}
+                <span className="text-lime-300">Premium Electronics</span>
+                <br />
+                <span className="text-white">For Your Home & Business</span>
               </h1>
             </div>
             
-            {/* Subheading - Natural, with one strategic mention */}
+            {/* Subheading */}
             <div className={`transition-all duration-700 ease-out delay-100 ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <p className="mt-6 text-lg sm:text-xl text-gray-100 font-light leading-relaxed max-w-2xl">
-                From Warri to nationwide coverage, we deliver professional solar installations 
-                that cut energy costs by up to 70% with guaranteed performance.
+                From solar installations to the latest electronics — we bring you quality products 
+                and professional services at the best prices. Based in Warri, serving Nigeria.
               </p>
             </div>
             
-            {/* Key Benefits - Clean, no location spam */}
+            {/* Key Benefits */}
             <div className={`mt-8 flex flex-wrap gap-3 transition-all duration-700 ease-out delay-200 ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 hover:bg-white/10 transition-all duration-300">
                 <span className="text-lime-300 text-sm">→</span>
-                <span className="text-sm font-medium">Eliminate Power Bills</span>
+                <span className="text-sm font-medium">Solar & Electronics</span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 hover:bg-white/10 transition-all duration-300 delay-75">
                 <span className="text-lime-300 text-sm">→</span>
-                <span className="text-sm font-medium">Performance Guarantee</span>
+                <span className="text-sm font-medium">Best Prices Guaranteed</span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 hover:bg-white/10 transition-all duration-300 delay-150">
                 <span className="text-lime-300 text-sm">→</span>
-                <span className="text-sm font-medium">Smart Energy Monitoring</span>
+                <span className="text-sm font-medium">Professional Installation</span>
               </div>
             </div>
             
-            {/* CTA Section - Clean, strategic */}
+            {/* CTA Section */}
             <div className={`mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 transition-all duration-700 ease-out delay-300 ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
-              <Link href="/contact" className="block">
+              <Link href="/products" className="block">
                 <button className="group relative rounded-xl bg-lime-400 px-8 py-4 text-base font-semibold text-neutral-900 hover:bg-lime-300 transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-lg hover:shadow-xl w-full sm:w-auto">
                   <span className="relative z-10 flex items-center justify-center gap-2">
-                    Get Free Solar Consultation
+                    Shop Solar & Electronics
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
@@ -83,19 +85,24 @@ export default function Hero() {
                 </button>
               </Link>
               
-              <Link href="/products" className="block">
+              <a
+                href="https://wa.me/2348123589191"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
                 <button className="rounded-xl border border-white/30 px-8 py-4 text-base font-medium text-white hover:bg-white/5 hover:border-white/50 transition-all duration-300 group w-full sm:w-auto">
                   <span className="flex items-center justify-center gap-2">
-                    View Solar Solutions
+                    Get Free Consultation
                     <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </span>
                 </button>
-              </Link>
+              </a>
             </div>
             
-            {/* Trust Indicators - Clean, with subtle location context */}
+            {/* Trust Indicators */}
             <div className={`mt-10 pt-8 border-t border-white/10 transition-all duration-700 ease-out delay-400 ${
               isMounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
@@ -109,16 +116,16 @@ export default function Hero() {
                   <div className="text-xs text-gray-400 mt-1">Customer Rating</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-300">20yr</div>
-                  <div className="text-xs text-gray-400 mt-1">manufacturer Panel Warranty</div>
+                  <div className="text-2xl font-bold text-lime-300">Solar</div>
+                  <div className="text-xs text-gray-400 mt-1">& Electronics Expert</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-lime-300"></div>
-                  <div className="text-xs text-gray-400 mt-1">Nationwide Support</div>
+                  <div className="text-2xl font-bold text-lime-300">Warri</div>
+                  <div className="text-xs text-gray-400 mt-1">Based • Nationwide</div>
                 </div>
               </div>
               
-              {/* Testimonial - One strategic location mention */}
+              {/* Testimonial */}
               <div className="mt-8 flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
                 <div className="flex items-center flex-shrink-0">
                   {[...Array(5)].map((_, i) => (
@@ -128,15 +135,14 @@ export default function Hero() {
                   ))}
                 </div>
                 <p className="text-sm text-gray-300">
-                  "Professional solar installation cut our monthly bills by 65%. Excellent service 
-                  from our Warri-based team to nationwide coverage."
+                  "Quality products, professional solar installations, and great customer service from Warri to nationwide."
                 </p>
               </div>
               
-              {/* Service area - Clean, subtle mention */}
+              {/* Service area */}
               <div className="mt-6 text-center">
                 <p className="text-xs text-gray-400">
-                  Serving Nigeria • Premium Solar Installations • Residential & Commercial
+                  🌞 Solar Installation • 🛍️ Electronics • 💡 Smart Solutions • Nigeria-wide
                 </p>
               </div>
             </div>

@@ -1,13 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co',
+        hostname: 'cdn.sanity.io',
         port: '',
-        pathname: '/**',
+        pathname: '/images/**',
       },
     ],
   },

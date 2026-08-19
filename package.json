@@ -2,6 +2,7 @@
   "name": "bexcel-site",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,6 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@sanity/client": "^8.1.0",
+    "@sanity/image-url": "^2.1.1",
     "@vercel/analytics": "^2.0.1",
     "next": "^14.2.5",
     "react": "^18.2.0",
