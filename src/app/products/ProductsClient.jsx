@@ -1,7 +1,7 @@
 // src/app/products/ProductsClient.jsx
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/sections/products/ProductCard';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -17,21 +17,41 @@ export default function ProductsClient({
   
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState(initialSearch);
+  const productsRef = useRef(null);
 
   // Update search when URL changes
   useEffect(() => {
     const search = searchParams.get('search') || '';
     setSearchQuery(search);
+    
+    // ✅ Scroll to products when search is performed
+    if (search && productsRef.current) {
+      setTimeout(() => {
+        productsRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 100);
+    }
   }, [searchParams]);
 
-  // Handle search submit - dismiss keyboard
+  // Handle search submit - dismiss keyboard and scroll
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     // ✅ Dismiss the keyboard on mobile
     if (e.currentTarget) {
       e.currentTarget.blur();
     }
-    // The search is already handled by the onChange and filtering
+    
+    // ✅ Scroll to products after search
+    if (searchQuery.trim() && productsRef.current) {
+      setTimeout(() => {
+        productsRef.current.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+      }, 200);
+    }
   };
 
   // Filter products based on category and search
@@ -125,31 +145,33 @@ export default function ProductsClient({
         )}
       </div>
       
-      {/* Products Grid */}
-      {hasFilteredProducts ? (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
-          {filteredProducts.map((product, index) => (
-            <ProductCard 
-              key={product._id} 
-              product={product} 
-              isVisible={true}
-              delay={index * 50}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12 md:py-16 bg-white rounded-lg border border-gray-200">
-          <div className="text-4xl md:text-5xl mb-4 text-gray-300">🔍</div>
-          <h3 className="text-base md:text-lg font-semibold text-[#222222] mb-2">No products found</h3>
-          <p className="text-sm text-gray-500 mb-6">We couldn't find any products matching your criteria.</p>
-          <button 
-            onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}
-            className="px-5 py-2 md:px-6 md:py-2.5 bg-[#82B708] hover:bg-[#6B9606] text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md"
-          >
-            View All Products
-          </button>
-        </div>
-      )}
+      {/* ✅ Products Grid with ref for scrolling */}
+      <div ref={productsRef}>
+        {hasFilteredProducts ? (
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
+            {filteredProducts.map((product, index) => (
+              <ProductCard 
+                key={product._id} 
+                product={product} 
+                isVisible={true}
+                delay={index * 50}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12 md:py-16 bg-white rounded-lg border border-gray-200">
+            <div className="text-4xl md:text-5xl mb-4 text-gray-300">🔍</div>
+            <h3 className="text-base md:text-lg font-semibold text-[#222222] mb-2">No products found</h3>
+            <p className="text-sm text-gray-500 mb-6">We couldn't find any products matching your criteria.</p>
+            <button 
+              onClick={() => { setActiveCategory('all'); setSearchQuery(''); }}
+              className="px-5 py-2 md:px-6 md:py-2.5 bg-[#82B708] hover:bg-[#6B9606] text-white rounded-lg text-sm font-medium transition-all shadow-sm hover:shadow-md"
+            >
+              View All Products
+            </button>
+          </div>
+        )}
+      </div>
       
       {/* Need Help Section */}
       <div className="mt-12 md:mt-16 bg-white rounded-lg border border-gray-200 p-4 md:p-6 lg:p-8">
