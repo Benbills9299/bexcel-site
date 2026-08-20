@@ -1,9 +1,9 @@
 // src/app/products/page.jsx
+import { Suspense } from 'react';
 import { client } from '@/lib/sanity';
 import ProductsClient from './ProductsClient';
 import { FaBolt, FaBatteryFull, FaSolarPanel } from 'react-icons/fa';
 
-// Fetch products from Sanity on the server
 async function getProducts() {
   const query = `*[_type == "product"] {
     _id,
@@ -26,7 +26,6 @@ async function getProducts() {
   return await client.fetch(query);
 }
 
-// Get unique categories with counts
 function getCategoriesWithCounts(products) {
   const categories = {};
   products.forEach(product => {
@@ -114,14 +113,21 @@ export default async function ProductsPage() {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* ✅ Main Content - Wrapped in Suspense for useSearchParams */}
       <div className="w-full px-6 md:px-8 lg:px-12 max-w-7xl mx-auto py-12">
-        <ProductsClient 
-          products={products} 
-          categoryCounts={categoryCounts}
-          categoryNames={categoryNames}
-          categoryIcons={categoryIcons}
-        />
+        <Suspense fallback={
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#82B708] mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading products...</p>
+          </div>
+        }>
+          <ProductsClient 
+            products={products} 
+            categoryCounts={categoryCounts}
+            categoryNames={categoryNames}
+            categoryIcons={categoryIcons}
+          />
+        </Suspense>
       </div>
     </div>
   );
