@@ -24,6 +24,16 @@ export default function ProductsClient({
     setSearchQuery(search);
   }, [searchParams]);
 
+  // Handle search submit - dismiss keyboard
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    // ✅ Dismiss the keyboard on mobile
+    if (e.currentTarget) {
+      e.currentTarget.blur();
+    }
+    // The search is already handled by the onChange and filtering
+  };
+
   // Filter products based on category and search
   const filteredProducts = useMemo(() => {
     let filtered = products;
@@ -50,7 +60,7 @@ export default function ProductsClient({
     <>
       {/* Search Bar */}
       <div className="mb-6 md:mb-8">
-        <div className="flex flex-col md:flex-row gap-4">
+        <form onSubmit={handleSearchSubmit} className="flex flex-col md:flex-row gap-4">
           <div className="flex-1 relative">
             <input
               type="text"
@@ -60,7 +70,7 @@ export default function ProductsClient({
               className="w-full pl-4 pr-4 py-2.5 md:py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#82B708]/50 focus:border-[#82B708] text-sm bg-white"
             />
           </div>
-        </div>
+        </form>
       </div>
       
       {/* Category Filters */}
