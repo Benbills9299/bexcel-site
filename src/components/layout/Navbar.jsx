@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { FaSearch, FaTimes } from 'react-icons/fa';
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -15,8 +16,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHeroSection, setIsHeroSection] = useState(true);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
+  const router = useRouter();
   const heroRef = useRef(null);
+  const searchInputRef = useRef(null);
 
   // Page type detection
   const isHomePage = pathname === '/';
@@ -49,6 +54,23 @@ const Navbar = () => {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHomePage]);
+
+  // Focus search input when opened
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      setTimeout(() => searchInputRef.current.focus(), 100);
+    }
+  }, [isSearchOpen]);
+
+  // Handle search
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   // ============ NAVBAR BACKGROUND ============
   const getNavbarBackground = () => {
@@ -145,128 +167,199 @@ const Navbar = () => {
     return isScrolled ? 'text-gray-800' : 'text-gray-900';
   };
 
+  // ============ SEARCH ICON COLOR ============
+  const getSearchColor = () => {
+    if (isHomePage) {
+      if (isHeroSection) {
+        return isScrolled ? 'text-gray-800 hover:text-[#82B708]' : 'text-white hover:text-lime-400';
+      } else {
+        return 'text-gray-800 hover:text-[#82B708]';
+      }
+    }
+    return isScrolled ? 'text-gray-800 hover:text-[#82B708]' : 'text-gray-900 hover:text-[#82B708]';
+  };
+
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 font-sans ${getNavbarBackground()}`}>
-      <div className="w-full px-6 md:px-8 lg:px-12 max-w-7xl mx-auto">
-        
-        {/* ✅ INCREASED PADDING HERE */}
-        <div className="flex justify-between items-center py-4 md:py-5">
+    <>
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 font-sans ${getNavbarBackground()}`}>
+        <div className="w-full px-6 md:px-8 lg:px-12 max-w-7xl mx-auto">
           
-          {/* Logo */}
-          <div className="flex items-center z-50">
-            <Link href="/" className="flex items-center">
-              <img
-                src="/logo.svg"
-                alt="Bexcel Innovations Logo"
-                className={`h-8 md:h-10 cursor-pointer transition-all duration-300 ${getLogoBrightness()}`}
-              />
-            </Link>
+          <div className="flex justify-between items-center py-4 md:py-5">
+            
+            {/* Logo */}
+            <div className="flex items-center z-50">
+              <Link href="/" className="flex items-center">
+                <img
+                  src="/logo.svg"
+                  alt="Bexcel Innovations Logo"
+                  className={`h-8 md:h-10 cursor-pointer transition-all duration-300 ${getLogoBrightness()}`}
+                />
+              </Link>
+            </div>
+
+            {/* Desktop Navigation + Search */}
+            <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href || 
+                  (link.href !== '/' && pathname?.startsWith(link.href));
+                
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`transition-colors duration-200 text-sm lg:text-base ${
+                      isActive 
+                        ? `${getActiveColor()}` 
+                        : `${getTextColor()} font-normal ${getHoverColor()}`
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
+              
+              {/* ✅ SEARCH ICON - Desktop */}
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className={`transition-colors duration-200 p-2 rounded-full hover:bg-white/10 ${getSearchColor()}`}
+                aria-label="Search products"
+              >
+                <FaSearch className="w-4 h-4" />
+              </button>
+            </nav>
+
+            {/* Mobile Right Icons */}
+            <div className="flex items-center gap-2 z-50">
+              {/* ✅ SEARCH ICON - Mobile */}
+              <button
+                onClick={() => setIsSearchOpen(!isSearchOpen)}
+                className={`md:hidden transition-colors duration-200 p-1.5 rounded-full hover:bg-white/10 ${getSearchColor()}`}
+                aria-label="Search products"
+              >
+                <FaSearch className="w-4 h-4" />
+              </button>
+
+              {/* Hamburger Button */}
+              <button
+                className={`md:hidden relative w-7 h-7 focus:outline-none z-50 transition-colors duration-300 ${getHamburgerColor()}`}
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen ? "Close Navigation" : "Open Navigation"}
+              >
+                <span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                  isOpen ? "opacity-0 rotate-90" : "opacity-100"
+                }`}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+                </span>
+                <span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                  isOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"
+                }`}>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                  </svg>
+                </span>
+              </button>
+            </div>
           </div>
 
-          {/* Hamburger Button */}
-          <button
-            className={`md:hidden relative w-7 h-7 focus:outline-none z-50 transition-colors duration-300 ${getHamburgerColor()}`}
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label={isOpen ? "Close Navigation" : "Open Navigation"}
-          >
-            <span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
-              isOpen ? "opacity-0 rotate-90" : "opacity-100"
-            }`}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            </span>
-            <span className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
-              isOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"
-            }`}>
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </span>
-          </button>
-
-          {/* Desktop Links */}
-          <nav className="hidden md:flex space-x-6 lg:space-x-8">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || 
-                (link.href !== '/' && pathname?.startsWith(link.href));
+          {/* Mobile Menu */}
+          {isOpen && (
+            <div className="md:hidden fixed inset-0 z-40 pt-14">
+              <div 
+                className="fixed inset-0 bg-black/20" 
+                onClick={() => setIsOpen(false)}
+              />
               
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`transition-colors duration-200 text-sm lg:text-base ${
-                    isActive 
-                      ? `${getActiveColor()}` 
-                      : `${getTextColor()} font-normal ${getHoverColor()}`
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-        </div>
-
-        {/* Mobile Menu */}
-        {isOpen && (
-          <div className="md:hidden fixed inset-0 z-40 pt-14">
-            <div 
-              className="fixed inset-0 bg-black/20" 
-              onClick={() => setIsOpen(false)}
-            />
-            
-            <div className="relative mx-3 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
-              <nav className="flex flex-col p-3">
-                {navLinks.map((link) => {
-                  const isActive = pathname === link.href || 
-                    (link.href !== '/' && pathname?.startsWith(link.href));
-                  
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className={`group flex items-center hover:bg-gray-100 rounded-xl p-2 mb-1 transition-all duration-300 ${
-                        isActive ? 'bg-gray-100' : ''
-                      }`}
-                    >
-                      <div className={`w-1.5 h-1.5 rounded-full mr-3 transition-opacity duration-300 ${
-                        isActive 
-                          ? 'opacity-100 bg-[#82B708]' 
-                          : 'opacity-0 group-hover:opacity-100 bg-gray-600'
-                      }`}></div>
-                      <span className={`transition-colors duration-300 text-sm ${
-                        isActive 
-                          ? 'text-[#82B708] font-semibold' 
-                          : 'text-gray-800 group-hover:text-[#82B708]'
-                      }`}>
-                        {link.label}
-                      </span>
-                      <svg  
-                        className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 text-gray-600" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="2"
-                        viewBox="0 0 24 24"
+              <div className="relative mx-3 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+                <nav className="flex flex-col p-3">
+                  {navLinks.map((link) => {
+                    const isActive = pathname === link.href || 
+                      (link.href !== '/' && pathname?.startsWith(link.href));
+                    
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`group flex items-center hover:bg-gray-100 rounded-xl p-2 mb-1 transition-all duration-300 ${
+                          isActive ? 'bg-gray-100' : ''
+                        }`}
                       >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path>
-                      </svg>
-                    </Link>
-                  );
-                })}
-              </nav>
-              
-              <div className="px-4 py-1.5 border-t border-gray-200">
-                <div className="text-xs text-gray-600 text-center">
-                  Bexcel Innovations
+                        <div className={`w-1.5 h-1.5 rounded-full mr-3 transition-opacity duration-300 ${
+                          isActive 
+                            ? 'opacity-100 bg-[#82B708]' 
+                            : 'opacity-0 group-hover:opacity-100 bg-gray-600'
+                        }`}></div>
+                        <span className={`transition-colors duration-300 text-sm ${
+                          isActive 
+                            ? 'text-[#82B708] font-semibold' 
+                            : 'text-gray-800 group-hover:text-[#82B708]'
+                        }`}>
+                          {link.label}
+                        </span>
+                        <svg  
+                          className="w-3.5 h-3.5 ml-auto opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1 text-gray-600" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                      </Link>
+                    );
+                  })}
+                </nav>
+                
+                <div className="px-4 py-1.5 border-t border-gray-200">
+                  <div className="text-xs text-gray-600 text-center">
+                    Bexcel Innovations
+                  </div>
                 </div>
               </div>
             </div>
+          )}
+        </div>
+      </header>
+
+      {/* ✅ SEARCH OVERLAY */}
+      {isSearchOpen && (
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-start justify-center pt-20 md:pt-28 px-4">
+          <div 
+            className="absolute inset-0" 
+            onClick={() => setIsSearchOpen(false)}
+          />
+          <div className="relative w-full max-w-2xl">
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full px-6 py-4 text-lg bg-white rounded-2xl shadow-2xl border-2 border-[#82B708] focus:outline-none focus:border-[#82B708] pr-14"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#82B708] text-white p-3 rounded-xl hover:bg-[#6B9606] transition-colors"
+              >
+                <FaSearch className="w-5 h-5" />
+              </button>
+            </form>
+            <button
+              onClick={() => setIsSearchOpen(false)}
+              className="absolute -top-12 right-0 text-white hover:text-lime-400 transition-colors"
+            >
+              <FaTimes className="w-6 h-6" />
+            </button>
+            <p className="text-white/70 text-sm mt-4 text-center">
+              Search by product name or description
+            </p>
           </div>
-        )}
-      </div>
-    </header>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -1,7 +1,8 @@
 // src/app/products/ProductsClient.jsx
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/sections/products/ProductCard';
 import { FaWhatsapp } from 'react-icons/fa';
 
@@ -11,8 +12,17 @@ export default function ProductsClient({
   categoryNames, 
   categoryIcons 
 }) {
+  const searchParams = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+  
   const [activeCategory, setActiveCategory] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState(initialSearch);
+
+  // Update search when URL changes
+  useEffect(() => {
+    const search = searchParams.get('search') || '';
+    setSearchQuery(search);
+  }, [searchParams]);
 
   // Filter products based on category and search
   const filteredProducts = useMemo(() => {
@@ -26,7 +36,8 @@ export default function ProductsClient({
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(p => 
         p.name?.toLowerCase().includes(query) ||
-        p.shortDesc?.toLowerCase().includes(query)
+        p.shortDesc?.toLowerCase().includes(query) ||
+        p.description?.toLowerCase().includes(query)
       );
     }
     
@@ -52,7 +63,7 @@ export default function ProductsClient({
         </div>
       </div>
       
-      {/* Category Filters - Without Counts */}
+      {/* Category Filters */}
       <div className="flex flex-wrap items-center gap-1.5 md:gap-2 mb-6 md:mb-8 p-3 md:p-4 bg-white rounded-lg border border-gray-200">
         <span className="text-xs md:text-sm font-medium text-gray-700 mr-1 md:mr-2">Categories:</span>
         
@@ -104,7 +115,7 @@ export default function ProductsClient({
         )}
       </div>
       
-      {/* ✅ Products Grid - Mobile Friendly: 2 columns on mobile, 2 on tablet, 3 on desktop */}
+      {/* Products Grid */}
       {hasFilteredProducts ? (
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 lg:gap-6">
           {filteredProducts.map((product, index) => (
